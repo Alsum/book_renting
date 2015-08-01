@@ -1,0 +1,64 @@
+{% extends "base.html"%}
+{% block title %}BooksList| {{ block.super }}{% endblock %}
+	
+{% block main %}
+
+	
+		<form action="{% url 'new_book' %}">
+			<input type="submit" value="add Book">
+		</form>	
+
+		<div>
+			<input id="q" type="text" placeholder="title ,isbn or author name"/>
+			<input id="searchSubmit" type="submit" value="Search"/> <br/> <br/>
+		</div>
+		
+		<table id="books_table" border="1" width="70%">
+
+			<tr> 
+				<td width="40%"> Title </td>
+				<td width="15%" > isbn</td> 
+				<td width="15%"> author_name</td>
+			</tr>
+			
+			<tr>
+				{% for book in book_list %}
+				<td>{{ book.title }}</td>
+				<td>{{ book.isbn }}</td>
+				<td>{{ book.author_name }}</td>
+			</tr>
+	        	{% endfor %}
+
+		</table> 
+ 
+		<div id="results"></div>
+		 	
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script type="text/javascript">
+	$( document ).ready( function() {
+		$( '#searchSubmit' ).click( function() {
+			q = $( '#q' ).val();
+			
+			$( '#results' ).load( '{% url 'book_search' %}?q=' + q );
+		});
+		
+	var mysearch = new LiveValidation("q");
+	mysearch.add( Validate.Presence, 
+              { failureMessage: "Don't just ignore me, I wanna be your friend!" } );
+	});
+	
+	$( document ).ajaxStart( function() {
+		$('#books_table').hide(); 
+	}).ajaxStop( function() {
+ 		$('#books_table').hide();
+	});
+	
+	
+	
+</script>
+
+{% endblock %}

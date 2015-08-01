@@ -1,0 +1,17 @@
+<html>
+
+	<head>
+			<title>{%block title %}BOOKS{% endblock %}</title>
+			<link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}css/style.css" />
+			<link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}css/livevalidation.css" />
+						
+	</head>
+		
+	<body>
+		{% block main %}{% endblock %}
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/livevalidation.js"></script>
+		{% block extra_js %}{% endblock %}	
+	</body>
+	
+</html>
